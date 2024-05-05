@@ -35,6 +35,6 @@ const port = process.env.PORT || 3000;
 /**
  * Listener on the port mentioned above
  */
-app.listen(port, '127.0.0.1', () => {
+app.listen(port, '0.0.0.0', () => {
     console.log(`Application is running on port: ${port}...`);
 });
