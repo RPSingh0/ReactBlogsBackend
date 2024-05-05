@@ -10,6 +10,15 @@ This project is created using Node.js, Express, and MongoDB.
 
 - **MongoDB**: MongoDB is a NoSQL database that uses a document-oriented data model. It's known for its flexibility, scalability, and ability to handle large volumes of data.
 
+## Blog Schema
+
+- **blogId**: String (default generated using uuid.v4())
+- **title**: String (required, max length of 100 characters)
+- **blogContent**: String (required, trimmed)
+- **tags**: Array of Strings (trimmed)
+- **favourite**: Boolean (default false)
+- **createdOn**: Date (default current date/time)
+
 ## API Endpoints
 
 All routes are under `/api/v1/blog`.
