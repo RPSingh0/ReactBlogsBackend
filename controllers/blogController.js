@@ -32,7 +32,7 @@ exports.getBlogById = catchAsync(async (req, res, next) => {
     res.status(blog.length !== 0 ? 200 : 204).json({
         status: 'success',
         data: {
-            blog: blog
+            blogs: blog
         }
     });
 });
@@ -96,7 +96,7 @@ exports.getFavouriteBlogs = catchAsync(async (req, res, next) => {
             favourite: true
         }).select('blogId title blogContent tags createdOn -_id');
     }
-    
+
     res.status(blogs.length !== 0 ? 200 : 204).json({
         status: 'success',
         results: blogs.length,
