@@ -10,9 +10,27 @@ const specs = require("./swaggerInit");
  * The main entrypoint `app` variable for application
  */
 const app = express();
+
+const corsOptions = {
+    origin: function (origin, callback) {
+        // Check if the request origin is in the allowed origins array
+        if (process.env.CORS_ORIGIN.indexOf(origin) !== -1 || !origin) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    }
+};
+
+app.use(cors(corsOptions));
+
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
-app.use(cors());
-app.use(morgan(':method :url :status :res[content-length] - :response-time ms'))
+
+morgan.token('fullUrl', function (req) {
+    return req.protocol + '://' + req.get('host') + req.originalUrl;
+});
+
+app.use(morgan(':method :fullUrl :status :res[content-length] - :response-time ms'))
 
 app.use(express.json())
 
